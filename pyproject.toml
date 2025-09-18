@@ -1,0 +1,16 @@
+[project]
+name = "lyrimotion"
+version = "0.1.0"
+description = "自动化生成歌词MV的Python库，结合音乐节拍、情感分析与文生图，实现歌词驱动的动态视频创作。"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "diffusers>=0.35.1",
+    "moviepy>=2.2.1",
+    "torch>=2.8.0",
+    "torchvision>=0.23.0",
+    "transformers>=4.56.1",
+]
+
+[[tool.uv.index]]
+url = "https://download.pytorch.org/whl/cu128"
