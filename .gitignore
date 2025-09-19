@@ -208,3 +208,5 @@ __marimo__/
 
 /checkpoints/*
 !/checkpoints/Put the model here
+
+temp/

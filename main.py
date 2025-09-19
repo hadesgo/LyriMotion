@@ -1,25 +1,14 @@
-import json
-
-from lyrimotion import QwenLLM, ImageGenerator
+from lyrimotion import LyriMotion
 
 
 def main():
-    llm = QwenLLM()
-    text = llm.generate(
-        "穿着黑丝的美女，站在酒吧门口前",
+    lyri_motion = LyriMotion(
+        "./temp/海鸥 - 逃跑计划.lrc",
+        "./temp/海鸥 - 逃跑计划.mp3",
+        "动漫",
+        "./temp/output",
     )
-    del llm
-    json_text = json.loads(text)
-    print("prompt:", json_text["prompt"])
-    print("negative_prompt:", json_text["negative_prompt"])
-    image_generator = ImageGenerator()
-    image_generator.generate(
-        prompt=json_text["prompt"],
-        negative_prompt=json_text["negative_prompt"],
-        width=1664,
-        height=928,
-        output_path="output.png",
-    )
+    lyri_motion.run()
 
 
 if __name__ == "__main__":

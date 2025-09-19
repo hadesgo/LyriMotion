@@ -1,5 +1,4 @@
-from .image_generator import ImageGenerator
-from .llm import QwenLLM
+from .lyri_motion import LyriMotion
 
 
-__all__ = ["ImageGenerator", "QwenLLM"]
+__all__ = ["LyriMotion"]
