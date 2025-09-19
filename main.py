@@ -1,10 +1,24 @@
-from lyrimotion import ImageGenerator
+import json
+
+from lyrimotion import QwenLLM, ImageGenerator
 
 
 def main():
-    image_gen = ImageGenerator()
-    image_gen.generate(
-        "Landscape, beautiful sky, rainbow in the sky", 1920, 1080, "./local.png"
+    llm = QwenLLM()
+    text = llm.generate(
+        "穿着黑丝的美女，站在酒吧门口前",
+    )
+    del llm
+    json_text = json.loads(text)
+    print("prompt:", json_text["prompt"])
+    print("negative_prompt:", json_text["negative_prompt"])
+    image_generator = ImageGenerator()
+    image_generator.generate(
+        prompt=json_text["prompt"],
+        negative_prompt=json_text["negative_prompt"],
+        width=1664,
+        height=928,
+        output_path="output.png",
     )
 
 

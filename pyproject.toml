@@ -5,8 +5,12 @@ description = "自动化生成歌词MV的Python库，结合音乐节拍、情感
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "accelerate>=1.10.1",
     "diffusers>=0.35.1",
+    "modelscope>=1.30.0",
     "moviepy>=2.2.1",
+    "numpy>=2.1.2",
+    "nunchaku",
     "torch>=2.8.0",
     "torchvision>=0.23.0",
     "transformers>=4.56.1",
@@ -14,3 +18,6 @@ dependencies = [
 
 [[tool.uv.index]]
 url = "https://download.pytorch.org/whl/cu128"
+
+[tool.uv.sources]
+nunchaku = { url = "https://github.com/nunchaku-tech/nunchaku/releases/download/v1.0.0/nunchaku-1.0.0+torch2.8-cp313-cp313-linux_x86_64.whl" }
