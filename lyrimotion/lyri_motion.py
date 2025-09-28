@@ -30,25 +30,24 @@ class LyriMotion:
 
     def generate_image_prompt(
         self, llm: QwenLLM, lyrics: list[LyricPrompt]
-    ) -> list[dict[str, str]]:
+    ) -> list[str]:
         image_prompts = []
         for lyric in lyrics:
             content = llm.generate(
                 TEXT_TO_IMAGE_PROMPT,
                 lyric.prompt + self.style,
             )
-            content = content.replace("```json", "").replace("```", "")
-            image_prompt = json.loads(content)
-            image_prompts.append(image_prompt)
+            content = content.strip()
+            content = content.replace("\n", " ")
+            image_prompts.append(content)
         return image_prompts
 
     def generate_images(
-        self, image_generator: ImageGenerator, image_prompts: list[dict[str, str]]
+        self, image_generator: ImageGenerator, image_prompts: list[str]
     ):
         for index, image_prompt in enumerate(image_prompts):
             image_generator.generate(
-                prompt=image_prompt["prompt"],
-                negative_prompt=image_prompt["negative_prompt"],
+                prompt=image_prompt,
                 width=1024,
                 height=1024,
                 output_path=os.path.join(self.out_dir, f"{index}.png"),

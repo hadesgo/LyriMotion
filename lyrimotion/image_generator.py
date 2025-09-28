@@ -46,7 +46,7 @@ class ImageGenerator:
             scheduler=scheduler,
         )
         # use per-layer offloading for low VRAM. This only requires 3-4GB of VRAM.
-        self.transformer.set_offload(True, use_pin_memory=False, num_blocks_on_gpu=50)
+        self.transformer.set_offload(True, use_pin_memory=False, num_blocks_on_gpu=40)
         # increase num_blocks_on_gpu if you have more VRAM
         self.pipe._exclude_from_cpu_offload.append("transformer")
         self.pipe.enable_sequential_cpu_offload()
@@ -55,13 +55,11 @@ class ImageGenerator:
         self,
         output_path: str,
         prompt: str,
-        negative_prompt: str = "",
         width: int = 1024,
         height: int = 1024,
     ):
         img = self.pipe(
-            prompt=prompt,
-            negative_prompt=negative_prompt,
+            prompt=prompt + "超清，4K，电影级构图",
             width=width,
             height=height,
             num_inference_steps=8,
